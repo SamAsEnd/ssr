@@ -34,7 +34,6 @@ class WebsitesTest extends TestCase
 
         $response->assertStatus(201);
         $response->assertJsonFragment($website->jsonSerialize());
-
         $this->assertDatabaseHas('websites', $website->jsonSerialize());
     }
 
@@ -60,7 +59,6 @@ class WebsitesTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonFragment($newWebsite->jsonSerialize());
-
         $this->assertDatabaseMissing('websites', $website->jsonSerialize());
     }
 
@@ -71,7 +69,7 @@ class WebsitesTest extends TestCase
         $response = $this->delete('/api/websites/' . $website->id);
 
         $response->assertStatus(200);
-
         $this->assertDatabaseMissing('websites', $website->jsonSerialize());
+        $this->assertDeleted($website);
     }
 }
