@@ -3,9 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Website;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class WebsitesTest extends TestCase
@@ -16,7 +14,7 @@ class WebsitesTest extends TestCase
     {
         $website = Website::factory()->create();
 
-        $response = $this->get('/api/website');
+        $response = $this->get('/api/websites');
 
         $response->assertStatus(200);
         $response->assertJsonFragment($website->jsonSerialize());
@@ -26,7 +24,7 @@ class WebsitesTest extends TestCase
     {
         $website = Website::factory()->make();
 
-        $response = $this->post('/api/website', [
+        $response = $this->post('/api/websites', [
             'name' => $website->name,
             'domain' => $website->domain,
             'description' => $website->description,
@@ -44,7 +42,7 @@ class WebsitesTest extends TestCase
     {
         $website = Website::factory()->create();
 
-        $response = $this->get('/api/website/' . $website->id);
+        $response = $this->get('/api/websites/' . $website->id);
 
         $response->assertStatus(200);
         $response->assertJsonFragment($website->jsonSerialize());
@@ -55,7 +53,7 @@ class WebsitesTest extends TestCase
         $website = Website::factory()->create();
         $newWebsite = Website::factory()->make();
 
-        $response = $this->patch('/api/website/' . $website->id, $newWebsite
+        $response = $this->patch('/api/websites/' . $website->id, $newWebsite
             ->makeVisible(['onboard_message', 'farewell_message'])
             ->jsonSerialize()
         );
@@ -70,7 +68,7 @@ class WebsitesTest extends TestCase
     {
         $website = Website::factory()->create();
 
-        $response = $this->delete('/api/website/' . $website->id);
+        $response = $this->delete('/api/websites/' . $website->id);
 
         $response->assertStatus(200);
 

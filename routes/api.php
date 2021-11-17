@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('website', WebsiteController::class)->except(['create', 'edit']);
+Route::resource('websites', WebsiteController::class)->except(['create', 'edit']);
+Route::resource('websites.posts', PostController::class)->except(['create', 'edit']);

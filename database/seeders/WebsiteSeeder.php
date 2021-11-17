@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
 use App\Models\Website;
 use Illuminate\Database\Seeder;
 
@@ -22,6 +23,8 @@ class WebsiteSeeder extends Seeder
             'farewell_message' => 'We hate to see you go. We hope you will comeback soon.',
         ]);
 
-        Website::factory(4)->create();
+        Website::factory(4)
+            ->has(Post::factory()->count(3))
+            ->create();
     }
 }
