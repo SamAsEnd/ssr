@@ -22,6 +22,11 @@ class Subscriber extends Model
         return $this->subscription_verified_at !== null;
     }
 
+    public function scopeConfirmed($query)
+    {
+        return $query->whereNotNull('subscription_verified_at');
+    }
+
     public function website(): BelongsTo
     {
         return $this->belongsTo(Website::class);

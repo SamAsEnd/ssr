@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Mail\NewPost;
 use App\Models\Post;
+use App\Models\Subscriber;
 use App\Models\Website;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -27,7 +30,13 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request, Website $website)
     {
-        return $website->posts()->create($request->validated());
+        $post = $website->posts()->create($request->validated());
+
+        foreach($website->subscribers()->confirmed()->get() as $subscriber) {
+            Mail::to($subscriber->email)->queue(new NewPost($subscriber, $post));
+        }
+
+        return $post;
     }
 
     /**

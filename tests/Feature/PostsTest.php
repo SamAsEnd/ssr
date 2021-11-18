@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Mail\NewPost;
 use App\Models\Post;
+use App\Models\Subscriber;
 use App\Models\Website;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class PostsTest extends TestCase
@@ -37,10 +40,12 @@ class PostsTest extends TestCase
         $response->assertJsonFragment($post->jsonSerialize());
     }
 
-    public function test_create_a_post()
+    public function test_create_a_post_with_no_sub()
     {
         $website = Website::factory()->create();
         $post = Post::factory()->make();
+
+        Mail::fake();
 
         $response = $this->post('/api/websites/' . $website->id . '/posts', $post->jsonSerialize());
 
@@ -49,6 +54,30 @@ class PostsTest extends TestCase
         $response->assertStatus(201);
         $response->assertJsonFragment($post->jsonSerialize());
         $this->assertDatabaseHas('posts', $post->jsonSerialize());
+
+        Mail::assertNothingQueued();
+        Mail::assertNothingSent();
+    }
+
+    public function test_create_a_post_with_three_subs()
+    {
+        $website = Website::factory()
+            ->has(Subscriber::factory(3))
+            ->create();
+
+        $post = Post::factory()->make();
+
+        Mail::fake();
+
+        $response = $this->post('/api/websites/' . $website->id . '/posts', $post->jsonSerialize());
+
+        $post->website_id = $website->id;
+
+        $response->assertStatus(201);
+        $response->assertJsonFragment($post->jsonSerialize());
+        $this->assertDatabaseHas('posts', $post->jsonSerialize());
+
+        Mail::assertQueued(NewPost::class, 3);
     }
 
     public function test_update_a_post()
