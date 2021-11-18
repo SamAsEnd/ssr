@@ -1,0 +1,639 @@
+{
+	"info": {
+		"_postman_id": "109f09a0-3562-4026-a145-0abf1dce3774",
+		"name": "simple subscription platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Website management",
+			"item": [
+				{
+					"name": "List websites",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/websites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register website",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Laravel Blog",
+									"type": "text"
+								},
+								{
+									"key": "domain",
+									"value": "blog.laravel.com",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "The best blog ever",
+									"type": "text"
+								},
+								{
+									"key": "onboard_message",
+									"value": "Welcome new subscriber",
+									"type": "text"
+								},
+								{
+									"key": "farewell_message",
+									"value": "Good Bye subcriber",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/websites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get website",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6a996-ad52-4ef5-9d7e-c4edd6932b04",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6a996-ad52-4ef5-9d7e-c4edd6932b04"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update website",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "The New York Times",
+									"type": "text"
+								},
+								{
+									"key": "domain",
+									"value": "www.nytimes.com",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "The New York Times is an American daily newspaper based in New York City with a worldwide readership. Founded in 1851, the Times has since won 132 Pulitzer Prizes, the most of any newspaper, and has long been regarded within the industry as a national \"newspaper of record\".",
+									"type": "text"
+								},
+								{
+									"key": "onboard_message",
+									"value": "Welcome to the new york times",
+									"type": "text"
+								},
+								{
+									"key": "farewell_message",
+									"value": "Good bye to the new york times",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6a996-ad52-4ef5-9d7e-c4edd6932b04",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6a996-ad52-4ef5-9d7e-c4edd6932b04"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete website",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "The New York Times",
+									"type": "text"
+								},
+								{
+									"key": "domain",
+									"value": "www.nytimes.com",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "The New York Times is an American daily newspaper based in New York City with a worldwide readership. Founded in 1851, the Times has since won 132 Pulitzer Prizes, the most of any newspaper, and has long been regarded within the industry as a national \"newspaper of record\".",
+									"type": "text"
+								},
+								{
+									"key": "onboard_message",
+									"value": "Welcome to the new york times",
+									"type": "text"
+								},
+								{
+									"key": "farewell_message",
+									"value": "Good bye to the new york times",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6a996-ad52-4ef5-9d7e-c4edd6932b04",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6a996-ad52-4ef5-9d7e-c4edd6932b04"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Post management",
+			"item": [
+				{
+					"name": "List posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6cc74-9f8c-4871-a24f-ba1e0df13e1a/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6cc74-9f8c-4871-a24f-ba1e0df13e1a",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Some Title",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Some description about the post",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6cc74-9f8c-4871-a24f-ba1e0df13e1a/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6cc74-9f8c-4871-a24f-ba1e0df13e1a",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get post",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6cc74-9f8c-4871-a24f-ba1e0df13e1a/posts/94e6cd9c-2f9c-4b73-af81-126aeb85a3c8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6cc74-9f8c-4871-a24f-ba1e0df13e1a",
+								"posts",
+								"94e6cd9c-2f9c-4b73-af81-126aeb85a3c8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update post",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "New Title",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "New description about the post",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6cc74-9f8c-4871-a24f-ba1e0df13e1a/posts/94e6cd9c-2f9c-4b73-af81-126aeb85a3c8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6cc74-9f8c-4871-a24f-ba1e0df13e1a",
+								"posts",
+								"94e6cd9c-2f9c-4b73-af81-126aeb85a3c8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6cc74-9f8c-4871-a24f-ba1e0df13e1a/posts/94e6cd9c-2f9c-4b73-af81-126aeb85a3c8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6cc74-9f8c-4871-a24f-ba1e0df13e1a",
+								"posts",
+								"94e6cd9c-2f9c-4b73-af81-126aeb85a3c8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscription management",
+			"item": [
+				{
+					"name": "List subscribers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6e301-9bd7-4d08-9667-9d00d8f29cfa/subscribers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6e301-9bd7-4d08-9667-9d00d8f29cfa",
+								"subscribers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get subscriber",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6e301-9bd7-4d08-9667-9d00d8f29cfa/subscribers/94e6e301-bd41-4114-b017-22367b122a13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6e301-9bd7-4d08-9667-9d00d8f29cfa",
+								"subscribers",
+								"94e6e301-bd41-4114-b017-22367b122a13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscriber",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "sam1@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6e301-9bd7-4d08-9667-9d00d8f29cfa/subscribers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6e301-9bd7-4d08-9667-9d00d8f29cfa",
+								"subscribers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Subscribtion",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "4sam21@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6e301-9bd7-4d08-9667-9d00d8f29cfa/subscribers/94e6ede1-15b2-4f91-96a1-3c8d895a5d56/confirm?signature=6c6c6ed25a1f3862a8cc56e7315607abe784ba131083df970e47bd010b206840",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6e301-9bd7-4d08-9667-9d00d8f29cfa",
+								"subscribers",
+								"94e6ede1-15b2-4f91-96a1-3c8d895a5d56",
+								"confirm"
+							],
+							"query": [
+								{
+									"key": "signature",
+									"value": "6c6c6ed25a1f3862a8cc56e7315607abe784ba131083df970e47bd010b206840"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unsubscribe",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "4sam21@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/websites/94e6e301-9bd7-4d08-9667-9d00d8f29cfa/subscribers/94e6ede1-15b2-4f91-96a1-3c8d895a5d56/unsubscribe?signature=9e8ab191d276b25f38962c290dcced350f0a23c03da6ae92b5530cc80eec1c27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"websites",
+								"94e6e301-9bd7-4d08-9667-9d00d8f29cfa",
+								"subscribers",
+								"94e6ede1-15b2-4f91-96a1-3c8d895a5d56",
+								"unsubscribe"
+							],
+							"query": [
+								{
+									"key": "signature",
+									"value": "9e8ab191d276b25f38962c290dcced350f0a23c03da6ae92b5530cc80eec1c27"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
