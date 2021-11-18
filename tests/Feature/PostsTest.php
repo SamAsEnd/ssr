@@ -19,7 +19,6 @@ class PostsTest extends TestCase
      */
     public function test_list_posts()
     {
-        /** @var Post $post */
         $post = Post::factory()->create();
 
         $response = $this->get('/api/websites/' . $post->website_id . '/posts');
