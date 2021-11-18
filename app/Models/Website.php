@@ -15,10 +15,15 @@ class Website extends Model
 
     protected $hidden = ['onboard_message', 'farewell_message'];
 
-    protected $withCount = ['posts'];
+    protected $withCount = ['posts', 'subscribers'];
 
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function subscribers(): HasMany
+    {
+        return $this->hasMany(Subscriber::class);
     }
 }
