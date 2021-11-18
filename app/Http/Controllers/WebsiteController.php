@@ -5,67 +5,34 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreWebsiteRequest;
 use App\Http\Requests\UpdateWebsiteRequest;
 use App\Models\Website;
+use App\Repositories\WebsiteRepository;
+use App\Services\WebsiteService;
+use Illuminate\Database\Eloquent\Model;
 
 class WebsiteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(WebsiteRepository $repository)
     {
-        return Website::query()->paginate(10);
+        return $repository->all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreWebsiteRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreWebsiteRequest $request)
+    public function store(StoreWebsiteRequest $request, WebsiteService $service): Website|Model
     {
-        return Website::query()
-            ->create($request->validated())
-            ->makeVisible(['onboard_message', 'farewell_message']);
+        return $service->store($request->validated());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Website  $website
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Website $website)
+    public function show(Website $website): Website|Model
     {
         return $website;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateWebsiteRequest  $request
-     * @param  \App\Models\Website  $website
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateWebsiteRequest $request, Website $website)
+    public function update(UpdateWebsiteRequest $request, Website $website, WebsiteService $service)
     {
-        $website->update($request->validated());
-
-        return $website->makeVisible(['onboard_message', 'farewell_message']);
+        return $service->update($website, $request->validated());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Website  $website
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Website $website)
+    public function destroy(Website $website, WebsiteService $service)
     {
-        $website->delete();
-
-        return $website;
+        return $service->destroy($website);
     }
 }

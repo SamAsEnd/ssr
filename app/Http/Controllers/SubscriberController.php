@@ -9,64 +9,36 @@ use App\Mail\GoodByeSubscriber;
 use App\Mail\WelcomeSubscriber;
 use App\Models\Subscriber;
 use App\Models\Website;
+use App\Repositories\SubscriberRepository;
+use App\Services\SubscriberService;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 
 class SubscriberController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Website $website)
+    public function index(Website $website, SubscriberRepository $repository): Collection
     {
-        return $website->subscribers()->latest()->paginate(10);
+        return $repository->all($website);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subscriber  $subscriber
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Website $website, Subscriber $subscriber)
+    public function show(Website $website, Subscriber $subscriber): Subscriber|Model
     {
         return $subscriber;
     }
 
-    public function store(SubscriberRequest $request, Website $website)
+    public function store(SubscriberRequest $request, Website $website, SubscriberService $service)
     {
-        $subscriber = $website->subscribers()->create($request->validated());
-
-        Mail::to($subscriber->email)
-            ->queue(new ConfirmSubscription($subscriber));
-
-        return $subscriber;
+        return $service->subscribe($website, $request->validated());
     }
 
-    public function confirm(Website $website, Subscriber $subscriber)
+    public function confirm(Website $website, Subscriber $subscriber, SubscriberService $service)
     {
-        if (! $subscriber->confirmed()) {
-            $subscriber->update([
-                'subscription_verified_at' => now(),
-            ]);
-
-            Mail::to($subscriber->email)
-                ->queue(new WelcomeSubscriber($subscriber));
-
-        }
-
-        return $subscriber;
+        return $service->confirm($subscriber);
     }
 
-    public function unsubscribe(Website $website, Subscriber $subscriber)
+    public function unsubscribe(Website $website, Subscriber $subscriber, SubscriberService $service)
     {
-        $email = $subscriber->email;
-        $subscriber->delete();
-
-        Mail::to($email)
-            ->queue(new GoodByeSubscriber($website));
-
-        return $subscriber;
+        return $service->unsubscribe($website, $subscriber);
     }
 }

@@ -8,72 +8,36 @@ use App\Mail\NewPost;
 use App\Models\Post;
 use App\Models\Subscriber;
 use App\Models\Website;
+use App\Repositories\PostRepository;
+use App\Services\PostService;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Website $website)
+    public function index(Website $website, PostRepository $repository): Collection
     {
-        return $website->posts()->latest()->paginate(10);
+        return $repository->all($website);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorePostRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorePostRequest $request, Website $website)
+    public function store(StorePostRequest $request, Website $website, PostService $service): Post|Model
     {
-        $post = $website->posts()->create($request->validated());
-
-        foreach($website->subscribers()->confirmed()->get() as $subscriber) {
-            Mail::to($subscriber->email)->queue(new NewPost($subscriber, $post));
-        }
-
-        return $post;
+        return $service->store($website, $request->validated());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Website $website, Post $post)
+    public function show(Website $website, Post $post): Post|Model
     {
         return $post;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePostRequest  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatePostRequest $request, Website $website, Post $post)
+    public function update(UpdatePostRequest $request, Website $website, Post $post, PostService $service): Post|Model
     {
-        $post->update($request->validated());
-
-        return $post;
+        return $service->update($post, $request->validated());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Website $website, Post $post)
+    public function destroy(Website $website, Post $post, PostService $service)
     {
-        $post->delete();
-
-        return $post;
+        return $service->destroy($post);
     }
 }
