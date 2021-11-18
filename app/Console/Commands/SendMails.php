@@ -3,8 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Mail\NewPost;
+use App\Models\SentMail;
 use App\Repositories\PostRepository;
+use App\Repositories\SentMailRepository;
 use App\Repositories\WebsiteRepository;
+use App\Services\SentMailService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
@@ -40,7 +43,11 @@ class SendMails extends Command
      *
      * @return int
      */
-    public function handle(PostRepository $repository, WebsiteRepository $websiteRepository)
+    public function handle(
+        PostRepository $repository,
+        WebsiteRepository $websiteRepository,
+        SentMailRepository $mailRepository,
+        SentMailService $mailService)
     {
         $postId = $this->argument('post');
 
@@ -52,7 +59,10 @@ class SendMails extends Command
         }
 
         foreach($websiteRepository->confirmedSubscribers($post->website) as $subscriber) {
-            Mail::to($subscriber->email)->queue(new NewPost($subscriber, $post));
+            if (! $mailRepository->exists($post, $subscriber)) {
+                Mail::to($subscriber->email)->queue(new NewPost($subscriber, $post));
+                $mailService->store($post, $subscriber);
+            }
         }
 
         return Command::SUCCESS;
